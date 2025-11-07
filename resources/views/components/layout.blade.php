@@ -15,6 +15,14 @@
 <body class="bg-background text-foreground">
     <header class="p-4 bg-secondary shadow">
         <h1 class="text-2xl text-secondary-foreground font-bold">My App</h1>
+        @auth
+        <div class="navbar-end gap-2">
+            <form action="/logout" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-ghost btn-sm">Logout</button>
+            </form>
+        </div>
+        @endauth
     </header>
 
     <main class="p-6">

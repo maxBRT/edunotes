@@ -14,10 +14,16 @@ class SchoolClass extends Model
         'teacher_name',
         'teacher_email',
         'class_website',
+        'user_id',
     ];
 
     public function notes()
     {
         return $this->hasMany(Notes::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

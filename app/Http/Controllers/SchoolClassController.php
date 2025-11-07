@@ -32,6 +32,7 @@ class SchoolClassController extends Controller
             'teacher_name' => $validated['teacher_name'],
             'teacher_email' => $validated['teacher_email'],
             'class_website' => $validated['class_website'],
+            'user_id' => $request->user()->id,
         ]);
 
         return redirect()->route('dashboard');
@@ -40,9 +41,15 @@ class SchoolClassController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(request $request, string $id)
     {
+
         $schoolClass = SchoolClass::findOrFail($id);
+
+        if ($request->user()->cannot('view', $schoolClass)) {
+            return redirect()->route('dashboard');
+        }
+
         $notes = $schoolClass->notes;
 
         return view('schoolclasses.show', [
@@ -55,10 +62,16 @@ class SchoolClassController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request, string $id)
     {
+        $schoolClass = SchoolClass::findOrFail($id);
+
+        if ($request->user()->cannot('update', $schoolClass)) {
+            return redirect()->route('dashboard');
+        }
+
         return view('schoolclasses.edit', [
-            'schoolClass' => SchoolClass::findOrFail($id)
+            'schoolClass' => $schoolClass,
         ]);
     }
 
@@ -67,6 +80,13 @@ class SchoolClassController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        $schoolClass = SchoolClass::findOrFail($id);
+
+        if ($request->user()->cannot('update', $schoolClass)) {
+            return redirect()->route('dashboard');
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'teacher_name' => 'required|string|max:255',
@@ -74,7 +94,6 @@ class SchoolClassController extends Controller
             'class_website' => 'required|string|url|max:255',
         ]);
 
-        $schoolClass = SchoolClass::findOrFail($id);
         $schoolClass->update([
             'name' => $validated['name'],
             'teacher_name' => $validated['teacher_name'],

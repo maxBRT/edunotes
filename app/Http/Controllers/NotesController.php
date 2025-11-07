@@ -29,6 +29,7 @@ class NotesController extends Controller
      */
     public function store(StoreNoteRequest $request)
     {
+
         $validated = $request->validated();
 
         Notes::create([
@@ -44,19 +45,25 @@ class NotesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
+
         $note = Notes::findOrFail($id);
+        if ($request->user()->cannot('view', $note)) {
+            return redirect()->route('dashboard');
+        }
 
         return view('notes.show', [
             'note' => $note,
         ]);
     }
 
-    public function edit(string $id)
+    public function edit(Request $request, string $id)
     {
         $note = Notes::findOrFail($id);
-
+        if ($request->user()->cannot('update', $note)) {
+            return redirect()->route('dashboard');
+        }
         return view('notes.edit', [
             'note' => $note,
         ]);
@@ -68,6 +75,11 @@ class NotesController extends Controller
     public function update($request, string $id)
     {
         $note = Notes::findOrFail($id);
+
+        if ($request->user()->cannot('update', $note)) {
+            return redirect()->route('dashboard');
+        }
+
         $validated = $request->validated();
 
         $note->update([
@@ -82,9 +94,12 @@ class NotesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         $note = Notes::findOrFail($id);
+        if ($request->user()->cannot('delete', $note)) {
+            return redirect()->route('dashboard');
+        }
         $classId = $note->school_class_id;
         $note->delete();
 
