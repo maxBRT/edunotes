@@ -11,8 +11,14 @@ class DashboardController extends Controller
         $user = $request->user();
 
         $schoolclasses = $user->schoolclasses;
+        $totalNotes = $user->schoolclasses()->withCount('notes')->get()->sum('notes_count');
+        $totalClasses = $schoolclasses->count();
+
         return view('dashboard', [
-            'schoolclasses' => $schoolclasses
+            'schoolclasses' => $schoolclasses,
+            'totalClasses' => $totalClasses,
+            'totalNotes' => $totalNotes,
+            'user' => $user,
         ]);
     }
 }
