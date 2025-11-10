@@ -2,9 +2,9 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
+use App\Models\Note;
 use Livewire\Attributes\On;
-use App\Models\Notes;
+use Livewire\Component;
 
 class DeleteNoteModal extends Component
 {
@@ -28,7 +28,7 @@ class DeleteNoteModal extends Component
     public function deleteNote()
     {
         if ($this->noteId) {
-            $note = Notes::findOrFail($this->noteId);
+            $note = Note::findOrFail($this->noteId);
             $note->delete();
 
             $this->closeModal();

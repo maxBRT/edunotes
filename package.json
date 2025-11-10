@@ -16,6 +16,7 @@
         "vite": "^7.0.7"
     },
     "dependencies": {
-        "easymde": "^2.20.0"
+        "easymde": "^2.20.0",
+        "prismjs": "^1.30.0"
     }
 }

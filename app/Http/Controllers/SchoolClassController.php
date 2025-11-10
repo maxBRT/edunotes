@@ -24,7 +24,8 @@ class SchoolClassController extends Controller
             'name' => 'required|string|max:255',
             'teacher_name' => 'required|string|max:255',
             'teacher_email' => 'required|string|email|max:255',
-            'class_website' => 'required|string|url|max:255',
+            'class_website' => 'nullable|url|max:255',
+
         ]);
 
         SchoolClass::create([
@@ -57,7 +58,6 @@ class SchoolClassController extends Controller
             'notes' => $notes,
         ]);
     }
-
 
     /**
      * Show the form for editing the specified resource.

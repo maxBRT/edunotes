@@ -1,60 +1,57 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\SchoolClassController;
-use App\Http\Controllers\NotesController;
-use App\Http\Controllers\Auth\RegisterController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmailVerificationController;
+use App\Http\Controllers\NoteController;
+use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\SchoolClassController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
-
+// Guest Routes
+Route::view('/', 'home')->name('home');
 Route::view('/login', 'auth.login')->name('login');
 Route::view('/register', 'auth.register')->name('register');
 
+// Auth Action Routes
 Route::post('/register', RegisterController::class);
 Route::post('/login', LoginController::class);
 Route::post('/logout', LogoutController::class)->name('logout');
 
-
-Route::middleware('auth')->group(function () {
-
+// Authenticated Routes
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
-    Route::get('/notes/create', [NotesController::class, 'create'])
-        ->name('notes.create');
+    Route::resource('/notes', NoteController::class);
+    Route::resource('/schoolclasses', SchoolClassController::class);
+});
 
-    Route::post('/notes', [NotesController::class, 'store'])
-        ->name('notes.store');
+// Email Verification Routes
+Route::post('/email/verification-notification', [EmailVerificationController::class, 'resend'])
+    ->middleware(['auth', 'throttle:6,1'])
+    ->name('verification.send');
 
-    Route::get('/notes/{note}', [NotesController::class, 'show'])
-        ->name('notes.show');
+Route::get('/email/verify', [emailVerificationController::class, 'show'])
+    ->name('verification.notice');
 
-    Route::get('/notes/{note}/edit', [NotesController::class, 'edit'])
-        ->name('notes.edit');
+Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])
+    ->middleware(['auth', 'signed'])
+    ->name('verification.verify');
 
-    Route::put('/notes/{note}', [NotesController::class, 'update'])
-        ->name('notes.update');
+// Password reset Routes
+Route::middleware(['guest'])->group(function () {
+    Route::get('/forgot-password', [PasswordResetController::class, 'index'])
+        ->name('password.request');
 
-    Route::delete('/notes/{note}', [NotesController::class, 'destroy'])
-        ->name('notes.destroy');
+    Route::post('/forgot-password', [PasswordResetController::class, 'sendReset'])
+        ->name('password.email');
 
-    Route::get('/schoolclasses/create', [SchoolClassController::class, 'create'])
-        ->name('schoolclasses.create');
+    Route::get('/reset-password/{token}', [PasswordResetController::class, 'showReset'])
+        ->name('password.reset');
 
-    Route::post('/schoolclasses', [SchoolClassController::class, 'store'])
-        ->name('schoolclasses.store');
-
-    Route::get('/schoolclasses/{schoolclass}', [SchoolClassController::class, 'show'])
-        ->name('schoolclasses.show');
-
-    Route::put('/schoolclasses/{schoolclass}', [SchoolClassController::class, 'update'])
-        ->name('schoolclasses.update');
-
-    Route::get('/schoolclasses/{schoolclass}/edit', [SchoolClassController::class, 'edit'])
-        ->name('schoolclasses.edit');
+    Route::post('/reset-password', [PasswordResetController::class, 'update'])
+        ->name('password.update');
 });

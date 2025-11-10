@@ -24,9 +24,16 @@
                         <label for="password" class="block text-sm font-medium mb-2">
                             Password
                         </label>
-                        <input type="password" id="password" name="password" required
-                            class="w-full px-4 py-2.5 bg-input text-foreground border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring transition-colors"
-                            placeholder="Enter your password">
+                        <div class="relative">
+                            <input type="password" id="password" name="password" required
+                                class="w-full px-4 py-2.5 pr-12 bg-input text-foreground border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring transition-colors"
+                                placeholder="Enter your password">
+                            <button type="button" onclick="togglePassword('password')"
+                                class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors">
+                                <x-icons.eye id="password-hide" />
+                                <x-icons.eye-slash id="password-show" class="hidden" />
+                            </button>
+                        </div>
                         @error('password')
                         <p class="text-destructive text-sm mt-1">{{ $message }}</p>
                         @enderror
@@ -55,7 +62,33 @@
                         </a>
                     </p>
                 </div>
+                <div class="mt-2 text-center">
+                    <p class="text-sm text-muted-foreground">
+                        Can't sign in?
+                        <a href="{{ route('password.request') }}" class="text-primary hover:underline font-medium">
+                            Reset Password
+                        </a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const hideIcon = document.getElementById(inputId + '-hide');
+            const showIcon = document.getElementById(inputId + '-show');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                hideIcon.classList.add('hidden');
+                showIcon.classList.remove('hidden');
+            } else {
+                input.type = 'password';
+                hideIcon.classList.remove('hidden');
+                showIcon.classList.add('hidden');
+            }
+        }
+    </script>
 </x-layout>

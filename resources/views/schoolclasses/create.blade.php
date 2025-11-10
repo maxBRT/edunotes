@@ -48,7 +48,6 @@
                         Class Website
                     </label>
                     <input type="url" id="class_website" name="class_website" value="{{ old('class_website') }}"
-                        required
                         class="w-full px-4 py-3 bg-input border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
                         placeholder="https://example.com">
                     @error('class_website')

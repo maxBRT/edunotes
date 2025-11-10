@@ -6,15 +6,15 @@
             <div
                 class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-8">
                 <x-icons.check class="w-4 h-4" />
-                Your Smart Study Companion
+                Take notes. Stay organized. Learn better.
             </div>
             <h1 class="text-6xl md:text-7xl font-extrabold text-foreground mb-6 leading-tight">
-                Learn Smarter with
+                Less noise, more learning
                 <span class="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> EduNotes</span>
             </h1>
             <p class="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
-                The ultimate platform to organize your classes, capture brilliant ideas, and ace your studies.
-                Everything you need in one beautiful place.
+                A clean, distraction-free space to take notes and stay organized for class.
+                Built for students who just want to focus on learning.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 @guest
@@ -47,9 +47,10 @@
     <section class="py-24 px-4 bg-muted/30">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-foreground mb-4">Everything You Need to Excel</h2>
-                <p class="text-lg text-muted-foreground max-w-2xl mx-auto">Powerful features designed to make learning
-                    easier and more effective</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-foreground mb-4">Made for how students actually study
+                </h2>
+                <p class="text-lg text-muted-foreground max-w-2xl mx-auto">Simple features designed to help you stay
+                    organized, take better notes, and learn more efficiently.</p>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
                 <div
@@ -73,7 +74,7 @@
                     </div>
                     <h3 class="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">Take Notes</h3>
                     <p class="text-muted-foreground leading-relaxed">
-                        Write and format stunning notes with our powerful markdown editor. Capture ideas, formulas, and
+                        Write and format stunning notes with our markdown editor. Capture ideas, formulas, and
                         insights effortlessly.
                     </p>
                 </div>
@@ -86,8 +87,7 @@
                     </div>
                     <h3 class="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">Study Smarter</h3>
                     <p class="text-muted-foreground leading-relaxed">
-                        Access your notes anytime, anywhere. Review key concepts and prepare for exams with maximum
-                        efficiency.
+                        Access your notes anytime, anywhere. Review key concepts and prepare for exams.
                     </p>
                 </div>
             </div>
@@ -107,11 +107,11 @@
                 class="relative py-20 px-8 text-center bg-gradient-to-br from-primary/10 via-accent/5 to-primary/5 rounded-3xl border border-primary/20 shadow-xl overflow-hidden">
                 <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
                 <div class="relative">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-foreground">Ready to transform your learning?
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-foreground">Ready to make studying a little
+                        easier?
                     </h2>
                     <p class="text-lg md:text-xl text-muted-foreground mb-10 leading-relaxed max-w-2xl mx-auto">
-                        Join thousands of students who are already organizing their learning and achieving better
-                        results with EduNotes.
+                        Join students who use EduNotes to stay organized and stress less.
                     </p>
                     <a href="{{ route('register') }}"
                         class="group inline-flex items-center gap-2 px-10 py-5 bg-primary text-primary-foreground rounded-xl font-bold text-lg shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300">

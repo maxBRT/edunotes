@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Notes;
+use App\Models\Note;
 use App\Models\SchoolClass;
 use Illuminate\Database\Seeder;
 
@@ -14,7 +14,7 @@ class NotesSeeder extends Seeder
     public function run(): void
     {
         SchoolClass::query()->each(function (SchoolClass $schoolClass) {
-            Notes::factory()
+            Note::factory()
                 ->count(rand(3, 8))
                 ->create([
                     'school_class_id' => $schoolClass->id,

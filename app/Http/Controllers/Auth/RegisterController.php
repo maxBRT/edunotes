@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rules\Password;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class RegisterController extends Controller
 {
@@ -27,7 +28,7 @@ class RegisterController extends Controller
                     ->mixedCase()
                     ->numbers()
                     ->symbols()
-                    ->max(60)
+                    ->max(60),
             ],
         ]);
 
@@ -37,7 +38,10 @@ class RegisterController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
+        event(new Registered($user));
+
         Auth::login($user);
-        return redirect()->route("dashboard")->with("message", "You are now logged in.");
+
+        return redirect()->route('dashboard')->with('message', 'You are now logged in.');
     }
 }

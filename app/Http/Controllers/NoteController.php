@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreNoteRequest;
 use App\Http\Requests\UpdateNoteRequest;
-use App\Models\Notes;
+use App\Models\Note;
 use App\Models\SchoolClass;
 use Illuminate\Http\Request;
 
-class NotesController extends Controller
+class NoteController extends Controller
 {
-
     /**
      * Show the form for creating a new resource.
      */
@@ -32,7 +31,7 @@ class NotesController extends Controller
 
         $validated = $request->validated();
 
-        Notes::create([
+        Note::create([
             'title' => $validated['title'],
             'content' => $validated['content'],
             'school_class_id' => $validated['school_class_id'],
@@ -48,7 +47,7 @@ class NotesController extends Controller
     public function show(Request $request, string $id)
     {
 
-        $note = Notes::findOrFail($id);
+        $note = Note::findOrFail($id);
         if ($request->user()->cannot('view', $note)) {
             return redirect()->route('dashboard');
         }
@@ -60,10 +59,11 @@ class NotesController extends Controller
 
     public function edit(Request $request, string $id)
     {
-        $note = Notes::findOrFail($id);
+        $note = Note::findOrFail($id);
         if ($request->user()->cannot('update', $note)) {
             return redirect()->route('dashboard');
         }
+
         return view('notes.edit', [
             'note' => $note,
         ]);
@@ -72,9 +72,8 @@ class NotesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update($request, string $id)
+    public function update(UpdateNoteRequest $request, Note $note)
     {
-        $note = Notes::findOrFail($id);
 
         if ($request->user()->cannot('update', $note)) {
             return redirect()->route('dashboard');
@@ -82,10 +81,7 @@ class NotesController extends Controller
 
         $validated = $request->validated();
 
-        $note->update([
-            'title' => $validated['title'],
-            'content' => $validated['content'],
-        ]);
+        $note->update($validated);
 
         return redirect()->route('notes.show', $note->id)
             ->with('success', 'Note updated successfully!');
@@ -96,7 +92,7 @@ class NotesController extends Controller
      */
     public function destroy(Request $request, string $id)
     {
-        $note = Notes::findOrFail($id);
+        $note = Note::findOrFail($id);
         if ($request->user()->cannot('delete', $note)) {
             return redirect()->route('dashboard');
         }

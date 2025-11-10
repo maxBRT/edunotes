@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class SchoolClass extends Model
 {
@@ -19,7 +19,7 @@ class SchoolClass extends Model
 
     public function notes()
     {
-        return $this->hasMany(Notes::class);
+        return $this->hasMany(Note::class);
     }
 
     public function user()
