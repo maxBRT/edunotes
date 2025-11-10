@@ -2,6 +2,8 @@
 
 A simple, free, and open-source platform to help students stay organized.
 
+https://edunotes.ca/
+
 ## About
 
 EduNotes is a straightforward tool built for students who need a simple way to manage their academic life. No complex features, no overwhelming interfaces—just the essentials to keep you organized.
