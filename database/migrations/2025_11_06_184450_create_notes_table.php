@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->integer('school_class_id');
             $table->foreign('school_class_id')->references('id')->on('school_classes')->onDelete('cascade');
             $table->timestamps();
         });
