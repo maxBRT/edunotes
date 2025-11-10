@@ -19,6 +19,11 @@ EduNotes is a straightforward tool built for students who need a simple way to m
 
 This project was created with one goal in mind: to provide students with an accessible, no-frills solution for staying on top of their coursework. We believe that productivity tools should be simple, not complicated.
 
+## Coming up next
+- Download your notes as markdown file
+- Create class related assignments with due date
+- Let me know what you would like !
+
 ## Getting Started
 
 ### Requirements
