@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notes', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->text('content');
-            $table->foreign('school_class_id')->references('id')->on('school_classes')->onDelete('cascade');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('notes')) {
+            Schema::create('notes', function (Blueprint $table) {
+                $table->id();
+                $table->string('title');
+                $table->text('content');
+                $table->foreign('school_class_id')->references('id')->on('school_classes')->onDelete('cascade');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

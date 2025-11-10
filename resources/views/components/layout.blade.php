@@ -53,7 +53,16 @@
     </main>
 
     <footer class="p-4 text-center text-sm text-muted-foreground">
-        &copy; {{ date('Y') }} EduNotes
+        <div class="flex flex-col items-center gap-2">
+            <div>&copy; {{ date('Y') }} EduNotes</div>
+            <a href="https://github.com/maxBRT/edunotes"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group">
+                <x-icons.github class="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <span>View on GitHub</span>
+            </a>
+        </div>
     </footer>
     @vite('resources/js/app.js')
     @livewireScripts
