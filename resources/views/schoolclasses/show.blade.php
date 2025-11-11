@@ -136,16 +136,6 @@
                             </div>
                         </div>
 
-                        <!-- Note Preview -->
-                        <div class="prose prose-sm max-w-none line-clamp-4 flex-1 mb-4
-                                    prose-headings:text-muted-foreground prose-p:text-muted-foreground
-                                    prose-a:text-muted-foreground prose-a:no-underline
-                                    prose-strong:text-muted-foreground prose-strong:font-medium
-                                    prose-code:text-muted-foreground prose-em:text-muted-foreground
-                                    prose-li:text-muted-foreground">
-                            {!! $note->content_html !!}
-                        </div>
-
                         <!-- Note Footer -->
                         <div class="pt-4 border-t border-border">
                             <div class="flex items-center justify-between text-xs text-muted-foreground mb-3">
