@@ -21,6 +21,7 @@ This project was created with one goal in mind: to provide students with an acce
 
 ## Coming up next
 - Download your notes as markdown file
+- Full text search
 - Create class related assignments with due date
 - Let me know what you would like !
 
