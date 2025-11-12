@@ -25,6 +25,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
+    Route::get('/notes/download/{note}', [NoteController::class, 'download'])
+        ->name('notes.download');
+
     Route::resource('/notes', NoteController::class);
     Route::resource('/schoolclasses', SchoolClassController::class);
 });

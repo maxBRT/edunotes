@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateNoteRequest;
 use App\Models\Note;
 use App\Models\SchoolClass;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class NoteController extends Controller
 {
@@ -100,5 +101,17 @@ class NoteController extends Controller
 
         return redirect()->route('schoolclasses.show', $classId)
             ->with('success', 'Note deleted successfully!');
+    }
+
+    public function download(Request $request, Note $note)
+    {
+        if ($request->user()->cannot('delete', $note)) {
+            return redirect()->route('dashboard');
+        }
+        $tempFile = tempnam(sys_get_temp_dir(), 'tempfile_');
+        $content = "# {$note->title}\n" . $note->content_html;
+        file_put_contents($tempFile, $content);
+
+        return Response::download($tempFile, $note->title . '.md')->deleteFileAfterSend(true);
     }
 }
