@@ -13,6 +13,10 @@
                     Edit Note
                 </a>
                 @endif
+                <a href="{{ route('notes.download', $note->id) }}"
+                    class="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-ring transition-opacity">
+                    Download
+                </a>
                 <livewire:emitter signal="openDeleteModal" message="Delete Note"
                     classes="px-4 py-3 bg-destructive text-destructive-foreground rounded-lg font-medium hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-ring transition-opacity" />
                 <livewire:delete-note-modal noteTitle="{{ $note->title }}" noteId="{{ $note->id }}" />
