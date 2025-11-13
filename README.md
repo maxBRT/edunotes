@@ -12,15 +12,15 @@ EduNotes is a straightforward tool built for students who need a simple way to m
 
 - Organize your classes and notes
 - Simple, clean interface
+- Download your notes as markdown file
 - Free to use, forever
-- Open source and community-driven
 
 ## Purpose
 
 This project was created with one goal in mind: to provide students with an accessible, no-frills solution for staying on top of their coursework. We believe that productivity tools should be simple, not complicated.
 
 ## Coming up next
-- Download your notes as markdown file
+
 - Full text search
 - Create class related assignments with due date
 - Let me know what you would like !
