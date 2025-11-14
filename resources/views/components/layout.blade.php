@@ -30,6 +30,11 @@
                 <x-icons.book class="w-8 h-8 text-primary" />
                 <span>EduNotes</span>
             </a>
+            @auth
+            @unless (request()->routeIs('home'))
+            <livewire:search-bar />
+            @endunless
+            @endauth
             <div class="flex items-center gap-4">
                 <button id="theme-toggle" class="p-2 rounded-lg hover:bg-secondary-foreground/10 transition-colors">
                     <x-icons.moon id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-secondary-foreground" />
@@ -55,10 +60,8 @@
     <footer class="p-4 text-center text-sm text-muted-foreground">
         <div class="flex flex-col items-center gap-2">
             <div>&copy; {{ date('Y') }} EduNotes</div>
-            <a href="https://github.com/maxBRT/edunotes"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group">
+            <a href="https://github.com/maxBRT/edunotes" target="_blank" rel="noopener noreferrer"
+                class="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group">
                 <x-icons.github class="w-5 h-5 group-hover:scale-110 transition-transform" />
                 <span>View on GitHub</span>
             </a>
