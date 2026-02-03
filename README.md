@@ -1,3 +1,5 @@
+⚠️This platform is not hosted anymore. Feel free to build it and use it localy.⚠️
+
 # EduNotes
 
 A simple, free, and open-source platform to help students stay organized.
